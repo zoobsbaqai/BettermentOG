@@ -9,45 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            VStack {
-                // Title
+        GeometryReader { geometry in
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemGray2), Color(UIColor.darkGray)]), startPoint: .bottomLeading, endPoint: .topTrailing)
+                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                Rectangle()
+                    .fill(.black)
+                    .frame(height: geometry.size.height / 2.5)
+                    .position(x: geometry.size.width / 2)
                 HStack {
-                    Text("Betterment")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                    Spacer()
-                    // Settings Icon
-                    NavigationLink(destination: SettingsView()) {
-                        Image(systemName: "gearshape")
-                            .font(.title)
-                            .foregroundColor(.primary)
-                    }
+                    Text("Better")
+                        .foregroundStyle(Color(UIColor.yellow))
+                        .font(.custom("Fredoka", size: 56))
+                        .position(CGPoint(x: 95.0, y: 50.0))
+                    Text("ment")
+                        .foregroundStyle(.white)
+                        .font(.custom("Chalkboard SE", size: 56))
+                        .position(CGPoint(x: 42, y: 50))
                 }
-                .padding()
-
-                // Routine Plans Section
-                VStack(alignment: .leading) {
-                    Text("Routine Plans")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .padding(.bottom, 5)
-
-                    // Project 50
-                    HStack {
-                        Text("Project 50")
-                            .font(.title3)
-                        Spacer()
-                    }
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(8)
-                }
-                .padding()
-
-                Spacer()
+                    
             }
-            .navigationBarHidden(true)
         }
     }
 }
