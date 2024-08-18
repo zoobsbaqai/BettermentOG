@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		165C1FA12C7196860027D6B7 /* Fredoka-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 165C1FA02C7196860027D6B7 /* Fredoka-SemiBold.ttf */; };
 		16C92E8A2C62F1BC000CE205 /* BettermentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C92E892C62F1BC000CE205 /* BettermentApp.swift */; };
 		16C92E8C2C62F1BC000CE205 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C92E8B2C62F1BC000CE205 /* ContentView.swift */; };
 		16C92E8E2C62F1BD000CE205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16C92E8D2C62F1BD000CE205 /* Assets.xcassets */; };
@@ -14,6 +15,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		165C1F9F2C7195F50027D6B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		165C1FA02C7196860027D6B7 /* Fredoka-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Fredoka-SemiBold.ttf"; path = "../../../../../../Downloads/Fredoka/static/Fredoka-SemiBold.ttf"; sourceTree = "<group>"; };
 		16C92E862C62F1BC000CE205 /* Betterment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Betterment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16C92E892C62F1BC000CE205 /* BettermentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BettermentApp.swift; sourceTree = "<group>"; };
 		16C92E8B2C62F1BC000CE205 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,6 +35,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		165C1F9C2C71948F0027D6B7 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				165C1FA02C7196860027D6B7 /* Fredoka-SemiBold.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		16C92E7D2C62F1BC000CE205 = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +62,8 @@
 		16C92E882C62F1BC000CE205 /* Betterment */ = {
 			isa = PBXGroup;
 			children = (
+				165C1F9F2C7195F50027D6B7 /* Info.plist */,
+				165C1F9C2C71948F0027D6B7 /* Font */,
 				16C92E892C62F1BC000CE205 /* BettermentApp.swift */,
 				16C92E8B2C62F1BC000CE205 /* ContentView.swift */,
 				16C92E8D2C62F1BD000CE205 /* Assets.xcassets */,
@@ -125,6 +138,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				165C1FA12C7196860027D6B7 /* Fredoka-SemiBold.ttf in Resources */,
 				16C92E912C62F1BD000CE205 /* Preview Assets.xcassets in Resources */,
 				16C92E8E2C62F1BD000CE205 /* Assets.xcassets in Resources */,
 			);
@@ -275,6 +289,7 @@
 				DEVELOPMENT_TEAM = 2N3AR49VW2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Betterment/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -304,6 +319,7 @@
 				DEVELOPMENT_TEAM = 2N3AR49VW2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Betterment/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
