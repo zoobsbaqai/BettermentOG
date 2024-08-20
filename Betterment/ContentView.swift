@@ -1,4 +1,3 @@
-
 //  ContentView.swift
 //  Betterment APP
 //  Created by Zohair Baqai on 2024-08-06.
@@ -48,7 +47,6 @@ struct ContentView: View {
                             .foregroundStyle(.white)
                             .font(.custom("Fredoka-SemiBold", size: 56))
                             .position(CGPoint(x: 38, y: 50))
-
                     }
                     
                     VStack {
@@ -85,6 +83,24 @@ struct SettingsView: View {
                     .foregroundStyle(.white)
                     .position(CGPoint(x: 195.0, y: 50.0))
             }
+        }
+    }
+}
+
+struct RoutPlans: View {
+    
+    let imageNames = ["TemplateCard", "TemplateCard", "TemplateCard"]
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                ForEach(imageNames, id: \.self) { imageName in
+                    Image(imageName)
+                }
+                Spacer()
+                    .frame(height: 200)
+            }
+            .padding()
         }
     }
 }
