@@ -30,7 +30,13 @@ struct ContentView: View {
                             .position(CGPoint(x: 350.0, y: 30.0))
                     }
                     
+                    RoutPlans()
+                        .position(x: 197, y: 600)
                     
+                    Text("Routine Plans")
+                        .font(.custom("Fredoka-SemiBold", size: 36))
+                        .position(CGPoint(x: 130.0, y: 195.0))
+                 
                     
                     HStack {
                         Text("Better")
@@ -42,7 +48,7 @@ struct ContentView: View {
                             .foregroundStyle(.white)
                             .font(.custom("Fredoka-SemiBold", size: 56))
                             .position(CGPoint(x: 38, y: 50))
-                        
+
                     }
                     
                     VStack {
