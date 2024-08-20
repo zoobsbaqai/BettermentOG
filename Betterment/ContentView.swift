@@ -63,10 +63,10 @@ struct ContentView: View {
 }
 
 struct SettingsView: View {
+    @State private var isNotificationsEnabled = false // State variable for the toggle
+
     var body: some View {
-        
         GeometryReader { geometry in
-            
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemGray2), Color(UIColor.darkGray)]), startPoint: .bottomLeading, endPoint: .topTrailing)
                     .edgesIgnoringSafeArea(.all)
@@ -82,6 +82,25 @@ struct SettingsView: View {
                     .font(.custom("Fredoka-SemiBold", size: 56))
                     .foregroundStyle(.white)
                     .position(CGPoint(x: 195.0, y: 50.0))
+                
+                VStack(spacing: 1) {
+                    Image("notiTab")
+                        .scaleEffect(1.13)
+                        .padding(.bottom, 8)
+                    
+                    HStack {
+                        Text("Push Notifications")
+                            .font(.custom("Inter", size: 20))
+                            .padding(.top, 1)
+                        
+                        Spacer()
+                        
+                        Toggle("", isOn: $isNotificationsEnabled)
+                            .labelsHidden()
+                    }
+                    .padding(.horizontal, 24)
+                }
+                .position(x: geometry.size.width / 2, y: geometry.size.height / 4)
             }
         }
     }
@@ -91,10 +110,12 @@ struct RoutPlanScroll: View {
     
     let imageNames = ["TemplateCard", "TemplateCard", "TemplateCard"]
     let buttonNames = ["LetsGo", "LetsGo", "LetsGo"]
+    let infNames = ["infBut", "infBut", "infBut"]
     
     var body: some View {
         ScrollView {
             ZStack{
+                
                 VStack(spacing: 20) {
                     ForEach(imageNames, id: \.self) { imageName in
                         Image(imageName)
@@ -114,6 +135,17 @@ struct RoutPlanScroll: View {
                     Spacer()
                         .frame(height: 190)
                 }
+                VStack(spacing: 20) {
+                    ForEach(infNames, id: \.self) {infName in
+                        Image(infName)
+                            .position(CGPoint(x: 337, y: 217))
+                        Spacer()
+                            .frame(height: 230)
+                    }
+                    Spacer()
+                        .frame(height: 190)
+                }
+
                 Text("Project 50")
                     .font(.custom("Fredoka-SemiBold", size: 28))
                     .foregroundStyle(.black)
@@ -130,7 +162,7 @@ struct RoutPlanScroll: View {
                     .position(CGPoint(x: 185.0, y: 0.0))
                     .scaleEffect(0.825)
                 Image("75hardthumb")
-                    .position(CGPoint(x: 90.0, y: 375.0))
+                    .position(CGPoint(x: 65.0, y: 375.0))
                     .scaleEffect(0.75)
                 Image("bettermentlogo-transformed")
                     .scaleEffect(0.2)
