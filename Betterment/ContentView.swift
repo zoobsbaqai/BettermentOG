@@ -107,71 +107,169 @@ struct SettingsView: View {
 }
 
 struct RoutPlanScroll: View {
-    
     let imageNames = ["TemplateCard", "TemplateCard", "TemplateCard"]
     let buttonNames = ["LetsGo", "LetsGo", "LetsGo"]
     let infNames = ["infBut", "infBut", "infBut"]
-    
-    var body: some View {
-        ScrollView {
-            ZStack{
-                
-                VStack(spacing: 20) {
-                    ForEach(imageNames, id: \.self) { imageName in
-                        Image(imageName)
-                        
-                    }
-                    
-                    Spacer()
-                        .frame(height: 190)
-                }
-                VStack(spacing: 20) {
-                    ForEach(buttonNames, id: \.self) {buttonName in
-                        Image(buttonName)
-                            .position(CGPoint(x: 70.0, y: 265.0))
-                        Spacer()
-                            .frame(height: 230)
-                    }
-                    Spacer()
-                        .frame(height: 190)
-                }
-                VStack(spacing: 20) {
-                    ForEach(infNames, id: \.self) {infName in
-                        Image(infName)
-                            .position(CGPoint(x: 337, y: 217))
-                        Spacer()
-                            .frame(height: 230)
-                    }
-                    Spacer()
-                        .frame(height: 190)
-                }
 
-                Text("Project 50")
-                    .font(.custom("Fredoka-SemiBold", size: 28))
-                    .foregroundStyle(.black)
-                    .position(CGPoint(x: 90.0, y: 216))
-                Text("75 Hard")
-                    .font(.custom("Fredoka-SemiBold", size: 28))
-                    .foregroundStyle(.black)
-                    .position(CGPoint(x: 72.5, y: 545.0))
-                Text("Betterment30")
-                    .font(.custom("Fredoka-SemiBold", size: 28))
-                    .foregroundStyle(.black)
-                    .position(CGPoint(x: 110.0, y: 876))
-                Image("p50thumbnail")
-                    .position(CGPoint(x: 185.0, y: 0.0))
-                    .scaleEffect(0.825)
-                Image("75hardthumb")
-                    .position(CGPoint(x: 65.0, y: 375.0))
-                    .scaleEffect(0.75)
-                Image("bettermentlogo-transformed")
-                    .scaleEffect(0.2)
-                    .position(CGPoint(x: 104.0, y: 765.0))
+    @State private var showPopup = false
+    @State private var popupTitle = ""
+    @State private var popupMessage = ""
+
+    var body: some View {
+        ZStack {
+            ScrollView {
+                ZStack {
+                    VStack(spacing: 20) {
+                        ForEach(imageNames, id: \.self) { imageName in
+                            Image(imageName)
+                        }
+                        Spacer()
+                            .frame(height: 190)
+                    }
+                    VStack(spacing: 20) {
+                        ForEach(buttonNames.indices, id: \.self) { index in
+                            Button(action: {
+                                buttonAction(index: index)
+                            }) {
+                                Image(buttonNames[index])
+                            }
+                            .position(CGPoint(x: 70.0, y: 265.0))
+                            Spacer()
+                                .frame(height: 230)
+                        }
+                        Spacer()
+                            .frame(height: 190)
+                    }
+                    VStack(spacing: 20) {
+                        ForEach(infNames.indices, id: \.self) { index in
+                            Button(action: {
+                                infoAction(index: index)
+                            }) {
+                                Image(infNames[index])
+                            }
+                            .position(CGPoint(x: 337, y: 217))
+                            Spacer()
+                                .frame(height: 230)
+                        }
+                        Spacer()
+                            .frame(height: 190)
+                    }
+                    Text("Project 50")
+                        .font(.custom("Fredoka-SemiBold", size: 28))
+                        .foregroundStyle(.black)
+                        .position(CGPoint(x: 90.0, y: 216))
+                    Text("75 Hard")
+                        .font(.custom("Fredoka-SemiBold", size: 28))
+                        .foregroundStyle(.black)
+                        .position(CGPoint(x: 72.5, y: 545.0))
+                    Text("Betterment30")
+                        .font(.custom("Fredoka-SemiBold", size: 28))
+                        .foregroundStyle(.black)
+                        .position(CGPoint(x: 110.0, y: 876))
+                    Image("p50thumbnail")
+                        .position(CGPoint(x: 185.0, y: 0.0))
+                        .scaleEffect(0.825)
+                    Image("75hardthumb")
+                        .position(CGPoint(x: 65.0, y: 375.0))
+                        .scaleEffect(0.75)
+                    Image("bettermentlogo-transformed")
+                        .scaleEffect(0.2)
+                        .position(CGPoint(x: 104.0, y: 765.0))
+                }
+                .padding()
             }
-            .padding()
+            .fadeOutTop()
+            // Overlay the popup when showPopup is true
+            if showPopup {
+                Color.black.opacity(0.4)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        showPopup = false
+                    }
+
+                CustomPopup(title: popupTitle, message: popupMessage) {
+                    showPopup = false
+                }
+            }
         }
-        .fadeOutTop()
+    }
+
+struct CustomPopup: View {
+    let title: String
+    let message: String
+    var onClose: () -> Void
+
+    var body: some View {
+        ZStack{
+            Color(.yellow)
+        VStack(spacing: 20) {
+            Text(title)
+                .font(.custom("Fredoka-SemiBold", size: 30))
+            Text(message)
+                .font(.custom("Fredoka-Regular", size: 20))
+                .multilineTextAlignment(.center)
+                .padding()
+            Button(action: {
+                onClose()
+            }) {
+                Text("Close")
+                    .font(.headline)
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+        }
+    }
+        .frame(width: 350, height: 375)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 10)
+        .position(CGPoint(x: 201, y: 200))
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.gray, lineWidth: 1)
+        )
+    }
+}
+
+    func buttonAction(index: Int) {
+        switch index {
+        case 0:
+            print("bread")
+        case 1:
+            print("cheese")
+        case 2:
+            print("tomato")
+        default:
+            break
+        }
+    }
+
+    func infoAction(index: Int) {
+        switch index {
+        case 0:
+            popupTitle = "Project 50"
+            popupMessage = """
+Project50 is a lifestyle challenge made for the top 1% of tomorrow.
+
+If you’re a creative, athlete, entrepreneur, high-performer or if you just want to start living your life to the fullest this is for you
+"""
+        case 1:
+            popupTitle = "75 Hard"
+            popupMessage = """
+75 HARD is a program that can help change your life. From your way of thinking, to the level of discipline you approach every single task in front of you with. This is about mental toughness.
+"""
+        case 2:
+            popupTitle = "Betterment30"
+            popupMessage = """
+Betterment30 is a rugged 30 day challenge in which you put yourself through a self betterment journey. If you are looking to live a more disciplined and happy life. This is for you. Get yourself together and be BETTER.
+"""
+        default:
+            break
         
+        }
+        showPopup = true
     }
 }
 
@@ -180,7 +278,6 @@ extension View {
         return mask(
             VStack(spacing: 0) {
                 
-                // Top gradient
                 LinearGradient(gradient:
                                 Gradient(
                                     colors: [Color.black.opacity(0), Color.black]),
@@ -193,10 +290,10 @@ extension View {
         )
     }
 }
+ 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
-
