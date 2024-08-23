@@ -36,7 +36,6 @@ struct ContentView: View {
                         .font(.custom("Fredoka-SemiBold", size: 36))
                         .position(CGPoint(x: 130.0, y: 195.0))
                     
-                    
                     HStack {
                         Text("Better")
                             .foregroundStyle(.yellow)
@@ -54,7 +53,6 @@ struct ContentView: View {
                             .foregroundStyle(.white)
                             .font(.custom("Fredoka-SemiBold", size: 35))
                             .position(CGPoint(x: 195, y: 100.0))
-                        
                     }
                 }
             }
@@ -64,7 +62,7 @@ struct ContentView: View {
 
 struct SettingsView: View {
     @State private var isNotificationsEnabled = false // State variable for the toggle
-
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -110,11 +108,11 @@ struct RoutPlanScroll: View {
     let imageNames = ["TemplateCard", "TemplateCard", "TemplateCard"]
     let buttonNames = ["LetsGo", "LetsGo", "LetsGo"]
     let infNames = ["infBut", "infBut", "infBut"]
-
+    
     @State private var showPopup = false
     @State private var popupTitle = ""
     @State private var popupMessage = ""
-
+    
     var body: some View {
         ZStack {
             ScrollView {
@@ -128,9 +126,7 @@ struct RoutPlanScroll: View {
                     }
                     VStack(spacing: 20) {
                         ForEach(buttonNames.indices, id: \.self) { index in
-                            Button(action: {
-                                buttonAction(index: index)
-                            }) {
+                            NavigationLink(destination: getDestinationView(index: index)) {
                                 Image(buttonNames[index])
                             }
                             .position(CGPoint(x: 70.0, y: 265.0))
@@ -172,80 +168,41 @@ struct RoutPlanScroll: View {
                     Image("75hardthumb")
                         .position(CGPoint(x: 65.0, y: 375.0))
                         .scaleEffect(0.75)
-                    Image("bettermentlogo-transformed")
+                    Image("betterwhite")
                         .scaleEffect(0.2)
                         .position(CGPoint(x: 104.0, y: 765.0))
                 }
                 .padding()
             }
             .fadeOutTop()
-            // Overlay the popup when showPopup is true
+            
             if showPopup {
                 Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         showPopup = false
                     }
-
+                
                 CustomPopup(title: popupTitle, message: popupMessage) {
                     showPopup = false
                 }
             }
         }
     }
-
-struct CustomPopup: View {
-    let title: String
-    let message: String
-    var onClose: () -> Void
-
-    var body: some View {
-        ZStack{
-            Color(.yellow)
-        VStack(spacing: 20) {
-            Text(title)
-                .font(.custom("Fredoka-SemiBold", size: 30))
-            Text(message)
-                .font(.custom("Fredoka-Regular", size: 20))
-                .multilineTextAlignment(.center)
-                .padding()
-            Button(action: {
-                onClose()
-            }) {
-                Text("Close")
-                    .font(.headline)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-        }
-    }
-        .frame(width: 350, height: 375)
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(radius: 10)
-        .position(CGPoint(x: 201, y: 200))
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.gray, lineWidth: 1)
-        )
-    }
-}
-
-    func buttonAction(index: Int) {
+    
+    func getDestinationView(index: Int) -> some View {
         switch index {
         case 0:
-            print("bread")
+            return AnyView(Project50View())
         case 1:
-            print("cheese")
+            return AnyView(Hard75View())
         case 2:
-            print("tomato")
+            return AnyView(Betterment30View())
         default:
-            break
+            return AnyView(EmptyView())
         }
     }
-
+    
     func infoAction(index: Int) {
         switch index {
         case 0:
@@ -267,14 +224,160 @@ Betterment30 is a rugged 30 day challenge in which you put yourself through a se
 """
         default:
             break
-        
         }
         showPopup = true
     }
 }
 
+struct Project50View: View {
+    @Environment(\.presentationMode) var presentationMode // Make sure this is inside the struct
+    var body: some View {
+        
+        ZStack{
+            Image("p50thumbnail")
+                .position(CGPoint(x: 198.0, y: 56.166))
+                .navigationBarBackButtonHidden(true)
+            VStack {
+                Spacer() // Pushes the button to the bottom
+                HStack {
+                    Spacer()
+                    Button(action: {
+                                   presentationMode.wrappedValue.dismiss() // Dismiss the view
+                               }) {
+                                   HStack {
+                                       Image(systemName: "chevron.backward")
+                                           .foregroundColor(.yellow)
+                                       Text("Back")
+                                           .foregroundColor(.yellow)
+                                           .font(.headline)
+                                   }
+                                   .padding()
+                                   .background(Color.gray.opacity(0.2))
+                                   .cornerRadius(20)
+                                   .shadow(radius: 2)
+                                   .position(CGPoint(x: 37.0, y: 132.5))
+                               }
+                               .padding(.trailing) // Padding from the right edge
+                }
+            }
+        }
+    }
+}
+
+struct Hard75View: View {
+    @Environment(\.presentationMode) var presentationMode // Make sure this is inside the struct
+    var body: some View {
+        
+        ZStack{
+            Image("75hardthumb")
+                .scaleEffect(0.75)
+                .position(CGPoint(x: 198.0, y: 60))
+                .navigationBarBackButtonHidden(true)
+            Text("Hard")
+                .position(CGPoint(x: 195.5, y: 150))
+            VStack {
+                Spacer() // Pushes the button to the bottom
+                HStack {
+                    Spacer()
+                    Button(action: {
+                                   presentationMode.wrappedValue.dismiss() // Dismiss the view
+                               }) {
+                                   HStack {
+                                       Image(systemName: "chevron.backward")
+                                           .foregroundColor(.yellow)
+                                       Text("Back")
+                                           .foregroundColor(.yellow)
+                                           .font(.headline)
+                                   }
+                                   .padding()
+                                   .background(Color.black.opacity(0.7))
+                                   .cornerRadius(20)
+                                   .shadow(radius: 2)
+                                   .position(CGPoint(x: 37.0, y: 132.0))
+                               }
+                               .padding(.trailing) // Padding from the right edge
+                }
+            }
+        }
+    }
+}
+struct Betterment30View: View {
+    @Environment(\.presentationMode) var presentationMode // Make sure this is inside the struct
+    var body: some View {
+        
+        ZStack{
+            Image("betterwhite")
+                .scaleEffect(0.4)
+                .position(CGPoint(x: 198.0, y: 80))
+                .navigationBarBackButtonHidden(true)
+            VStack {
+                Spacer() // Pushes the button to the bottom
+                HStack {
+                    Spacer()
+                    Button(action: {
+                                   presentationMode.wrappedValue.dismiss() // Dismiss the view
+                               }) {
+                                   HStack {
+                                       Image(systemName: "chevron.backward")
+                                           .foregroundColor(.yellow)
+                                       Text("Back")
+                                           .foregroundColor(.yellow)
+                                           .font(.headline)
+                                   }
+                                   .padding()
+                                   .background(Color.black.opacity(0.4))
+                                   .cornerRadius(8)
+                                   .shadow(radius: 2)
+                                   .position(CGPoint(x: 39.0, y: 70.0))
+                               }
+                               .padding(.trailing) // Padding from the right edge
+                }
+            }
+        }
+    }
+}
+
+struct CustomPopup: View {
+    let title: String
+    let message: String
+    var onClose: () -> Void
+    
+    var body: some View {
+        ZStack {
+            Color(.yellow)
+            VStack(spacing: 20) {
+                Text(title)
+                    .font(.custom("Fredoka-SemiBold", size: 30))
+                Text(message)
+                    .font(.custom("Fredoka-Regular", size: 20))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Button(action: {
+                    onClose()
+                }) {
+                    Text("Close")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+        }
+        .frame(width: 350, height: 375)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 10)
+        .position(CGPoint(x: 201, y: 200))
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.gray, lineWidth: 1)
+        )
+    }
+}
+
 extension View {
-    func fadeOutTop(fadeLength:CGFloat=25) -> some View {
+    func fadeOutTop(fadeLength: CGFloat = 25) -> some View {
         return mask(
             VStack(spacing: 0) {
                 
@@ -290,7 +393,6 @@ extension View {
         )
     }
 }
- 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
