@@ -79,7 +79,7 @@ struct SettingsView: View {
                 Text("Settings")
                     .font(.custom("Fredoka-SemiBold", size: 56))
                     .foregroundStyle(.white)
-                    .position(CGPoint(x: 195.0, y: 50.0))
+                    .position(CGPoint(x: 195.0, y: 40.0))
                 
                 VStack(spacing: 1) {
                     Image("notiTab")
@@ -89,12 +89,13 @@ struct SettingsView: View {
                     HStack {
                         Text("Push Notifications")
                             .font(.custom("Inter", size: 20))
-                            .padding(.top, 1)
+                            .padding(.top, 20)
                         
                         Spacer()
                         
                         Toggle("", isOn: $isNotificationsEnabled)
                             .labelsHidden()
+                            .padding(.top, 20)
                     }
                     .padding(.horizontal, 24)
                 }
@@ -267,70 +268,90 @@ struct Project50View: View {
 struct Hard75View: View {
     @Environment(\.presentationMode) var presentationMode // Make sure this is inside the struct
     var body: some View {
-        
-        ZStack{
-            Image("75hardthumb")
-                .scaleEffect(0.75)
-                .position(CGPoint(x: 198.0, y: 60))
-                .navigationBarBackButtonHidden(true)
-            Text("Hard")
-                .position(CGPoint(x: 195.5, y: 150))
-            VStack {
-                Spacer() // Pushes the button to the bottom
-                HStack {
-                    Spacer()
-                    Button(action: {
-                                   presentationMode.wrappedValue.dismiss() // Dismiss the view
-                               }) {
-                                   HStack {
-                                       Image(systemName: "chevron.backward")
-                                           .foregroundColor(.yellow)
-                                       Text("Back")
-                                           .foregroundColor(.yellow)
-                                           .font(.headline)
-                                   }
-                                   .padding()
-                                   .background(Color.black.opacity(0.7))
-                                   .cornerRadius(20)
-                                   .shadow(radius: 2)
-                                   .position(CGPoint(x: 37.0, y: 132.0))
-                               }
-                               .padding(.trailing) // Padding from the right edge
+        GeometryReader { geometry in
+            ZStack{
+                Rectangle()
+                    .fill(Color.black)
+                    .cornerRadius(35)
+                    .frame(height: geometry.size.height / 100)
+                    .position(x: geometry.size.width / 2, y: geometry.size.height / 3.25)
+                    .edgesIgnoringSafeArea(.all)
+                Image("75hardthumb")
+                    .scaleEffect(0.75)
+                    .position(CGPoint(x: 198.0, y: 60))
+                    .navigationBarBackButtonHidden(true)
+                Text("Hard")
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.black)
+                    .position(CGPoint(x: 195.5, y: 145))
+                    .font(.custom("Fredoka-SemiBold", size: 40))
+                VStack {
+                    Spacer() // Pushes the button to the bottom
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            presentationMode.wrappedValue.dismiss() // Dismiss the view
+                        }) {
+                            HStack {
+                                Image(systemName: "chevron.backward")
+                                    .foregroundColor(.yellow)
+                                Text("Back")
+                                    .foregroundColor(.yellow)
+                                    .font(.headline)
+                            }
+                            .padding()
+                            .background(Color.black.opacity(0.7))
+                            .cornerRadius(20)
+                            .shadow(radius: 1)
+                            .position(CGPoint(x: 40.0, y: 132.0))
+                        }
+                        .padding(.trailing) // Padding from the right edge
+                    }
                 }
             }
         }
     }
 }
+
 struct Betterment30View: View {
     @Environment(\.presentationMode) var presentationMode // Make sure this is inside the struct
     var body: some View {
-        
-        ZStack{
-            Image("betterwhite")
-                .scaleEffect(0.4)
-                .position(CGPoint(x: 198.0, y: 80))
-                .navigationBarBackButtonHidden(true)
-            VStack {
-                Spacer() // Pushes the button to the bottom
-                HStack {
-                    Spacer()
-                    Button(action: {
-                                   presentationMode.wrappedValue.dismiss() // Dismiss the view
-                               }) {
-                                   HStack {
-                                       Image(systemName: "chevron.backward")
-                                           .foregroundColor(.yellow)
-                                       Text("Back")
-                                           .foregroundColor(.yellow)
-                                           .font(.headline)
-                                   }
-                                   .padding()
-                                   .background(Color.black.opacity(0.4))
-                                   .cornerRadius(8)
-                                   .shadow(radius: 2)
-                                   .position(CGPoint(x: 39.0, y: 70.0))
-                               }
-                               .padding(.trailing) // Padding from the right edge
+        GeometryReader { geometry in
+            ZStack{
+                
+                Image("betterwhite")
+                    .scaleEffect(0.4)
+                    .position(CGPoint(x: 198.0, y: 80))
+                    .navigationBarBackButtonHidden(true)
+                
+                Rectangle()
+                    .fill(Color.black)
+                    .cornerRadius(35)
+                    .frame(height: geometry.size.height / 100)
+                    .position(x: geometry.size.width / 2, y: geometry.size.height / 3.175)
+                    .edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    Spacer() // Pushes the button to the bottom
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            presentationMode.wrappedValue.dismiss() // Dismiss the view
+                        }) {
+                            HStack {
+                                Image(systemName: "chevron.backward")
+                                    .foregroundColor(.yellow)
+                                Text("Back")
+                                    .foregroundColor(.yellow)
+                                    .font(.headline)
+                            }
+                            .padding(8)
+                            .background(Color.black.opacity(0.4))
+                            .cornerRadius(8)
+                            .shadow(radius: 1)
+                            .position(CGPoint(x: 39.0, y: 20))
+                        }
+                    }
                 }
             }
         }
