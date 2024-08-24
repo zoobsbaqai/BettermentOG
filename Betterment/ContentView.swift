@@ -239,31 +239,46 @@ struct Project50View: View {
                 .position(CGPoint(x: 198.0, y: 56.166))
                 .navigationBarBackButtonHidden(true)
             VStack {
-                Spacer() // Pushes the button to the bottom
                 HStack {
                     Spacer()
                     Button(action: {
                                    presentationMode.wrappedValue.dismiss() // Dismiss the view
-                               }) {
-                                   HStack {
-                                       Image(systemName: "chevron.backward")
-                                           .foregroundColor(.yellow)
-                                       Text("Back")
-                                           .foregroundColor(.yellow)
-                                           .font(.headline)
-                                   }
-                                   .padding()
-                                   .background(Color.gray.opacity(0.2))
-                                   .cornerRadius(20)
-                                   .shadow(radius: 2)
-                                   .position(CGPoint(x: 37.0, y: 132.5))
-                               }
+                    }) {
+                        HStack {
+                            
+                            Image(systemName: "chevron.backward")
+                                .foregroundColor(.yellow)
+                            Text("Back")
+                                .foregroundColor(.yellow)
+                                .font(.headline)
+                        }
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(20)
+                        .shadow(radius: 2)
+                        Spacer()
+                    }
                                .padding(.trailing) // Padding from the right edge
+                }
+                .padding(.bottom, 500)
+            }
+            VStack {
+                Text("What is your goal for this regiment?")
+                    .font(.custom("Fredoka-SemiBold", size: 20))
+                TextField("Your Goal", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+                    .padding()
+                    .padding(.bottom, 200)
+                Picker(selection: /*@START_MENU_TOKEN@*/.constant(1)/*@END_MENU_TOKEN@*/, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/) {
+                    Text("5AM").tag(1)
+                    Text("6AM").tag(2)
+                    Text("7AM").tag(3)
+                    Text("8AM").tag(4)
+                }
                 }
             }
         }
     }
-}
+
 
 struct Hard75View: View {
     @Environment(\.presentationMode) var presentationMode // Make sure this is inside the struct
@@ -286,13 +301,13 @@ struct Hard75View: View {
                     .position(CGPoint(x: 195.5, y: 145))
                     .font(.custom("Fredoka-SemiBold", size: 40))
                 VStack {
-                    Spacer() // Pushes the button to the bottom
                     HStack {
                         Spacer()
                         Button(action: {
-                            presentationMode.wrappedValue.dismiss() // Dismiss the view
+                                       presentationMode.wrappedValue.dismiss() // Dismiss the view
                         }) {
                             HStack {
+                                
                                 Image(systemName: "chevron.backward")
                                     .foregroundColor(.yellow)
                                 Text("Back")
@@ -300,13 +315,14 @@ struct Hard75View: View {
                                     .font(.headline)
                             }
                             .padding()
-                            .background(Color.black.opacity(0.7))
+                            .background(Color.gray.opacity(0.2))
                             .cornerRadius(20)
-                            .shadow(radius: 1)
-                            .position(CGPoint(x: 40.0, y: 132.0))
+                            .shadow(radius: 2)
+                            Spacer()
                         }
-                        .padding(.trailing) // Padding from the right edge
+                                   .padding(.trailing) // Padding from the right edge
                     }
+                    .padding(.bottom, 500)
                 }
             }
         }
@@ -332,26 +348,28 @@ struct Betterment30View: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    Spacer() // Pushes the button to the bottom
                     HStack {
                         Spacer()
                         Button(action: {
-                            presentationMode.wrappedValue.dismiss() // Dismiss the view
+                                       presentationMode.wrappedValue.dismiss() // Dismiss the view
                         }) {
                             HStack {
+                                
                                 Image(systemName: "chevron.backward")
                                     .foregroundColor(.yellow)
                                 Text("Back")
                                     .foregroundColor(.yellow)
                                     .font(.headline)
                             }
-                            .padding(8)
-                            .background(Color.black.opacity(0.4))
-                            .cornerRadius(8)
-                            .shadow(radius: 1)
-                            .position(CGPoint(x: 39.0, y: 20))
+                            .padding()
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(20)
+                            .shadow(radius: 2)
+                            Spacer()
                         }
+                                   .padding(.trailing) // Padding from the right edge
                     }
+                    .padding(.bottom, 500)
                 }
             }
         }
