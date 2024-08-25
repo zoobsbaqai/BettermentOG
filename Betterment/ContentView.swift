@@ -231,7 +231,12 @@ Betterment30 is a rugged 30 day challenge in which you put yourself through a se
 }
 
 struct Project50View: View {
+    @State private var selectedOption = "7:00AM" // State to keep track of the selected option
+    @State private var goal = ""
+    @State private var selectedTime: Double = 45
+    
     @Environment(\.presentationMode) var presentationMode // Make sure this is inside the struct
+    let times = ["6:00AM", "6:30AM", "7:00AM", "7:30AM", "8:00AM"]
     var body: some View {
         
         ZStack{
@@ -242,7 +247,7 @@ struct Project50View: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                                   presentationMode.wrappedValue.dismiss() // Dismiss the view
+                        presentationMode.wrappedValue.dismiss() // Dismiss the view
                     }) {
                         HStack {
                             
@@ -258,26 +263,51 @@ struct Project50View: View {
                         .shadow(radius: 2)
                         Spacer()
                     }
-                               .padding(.trailing) // Padding from the right edge
+                    .padding(.trailing) // Padding from the right edge
                 }
                 .padding(.bottom, 500)
             }
             VStack {
-                Text("What is your goal for this regiment?")
+                Text("What is your main goal for this regiment?")
                     .font(.custom("Fredoka-SemiBold", size: 20))
-                TextField("Your Goal", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
-                    .padding()
+                TextField("Your Goal", text: $goal)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(1)
+                    .padding(.horizontal, 5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 2.5)
+                            .stroke(Color.gray, lineWidth: 1.0)
+                    )
+                    .padding(.horizontal, 15)
                     .padding(.bottom, 200)
-                Picker(selection: /*@START_MENU_TOKEN@*/.constant(1)/*@END_MENU_TOKEN@*/, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/) {
-                    Text("5AM").tag(1)
-                    Text("6AM").tag(2)
-                    Text("7AM").tag(3)
-                    Text("8AM").tag(4)
-                }
-                }
             }
+            .padding(.bottom, 110)
+            VStack{
+                Text("Select a time for an alarm")
+                    .font(.custom("Fredoka-SemiBold", size: 20))
+                
+                Picker("Select an option", selection: $selectedOption) {
+                    ForEach(times, id: \.self) { option in
+                        Text(option)
+                    }
+                }
+                .pickerStyle(WheelPickerStyle()) // You can change the style here
+                .frame(height: 75)
+                
+            }
+            .padding(.bottom, 100)
+            VStack{
+                Text("Select how long you can excercise daily")
+                    .font(.custom("Fredoka-SemiBold", size: 20))
+                Text("Minutes: \(selectedTime, specifier: "%.0f")")
+                Slider(value: $selectedTime, in: 45...90, step: 1)
+                    .padding()
+                    .accentColor(.yellow)
+            }
+            .padding(.top, 120)
         }
     }
+}
 
 
 struct Hard75View: View {
@@ -304,7 +334,7 @@ struct Hard75View: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                                       presentationMode.wrappedValue.dismiss() // Dismiss the view
+                            presentationMode.wrappedValue.dismiss() // Dismiss the view
                         }) {
                             HStack {
                                 
@@ -320,7 +350,7 @@ struct Hard75View: View {
                             .shadow(radius: 2)
                             Spacer()
                         }
-                                   .padding(.trailing) // Padding from the right edge
+                        .padding(.trailing) // Padding from the right edge
                     }
                     .padding(.bottom, 500)
                 }
@@ -351,7 +381,7 @@ struct Betterment30View: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                                       presentationMode.wrappedValue.dismiss() // Dismiss the view
+                            presentationMode.wrappedValue.dismiss() // Dismiss the view
                         }) {
                             HStack {
                                 
@@ -367,7 +397,7 @@ struct Betterment30View: View {
                             .shadow(radius: 2)
                             Spacer()
                         }
-                                   .padding(.trailing) // Padding from the right edge
+                        .padding(.trailing) // Padding from the right edge
                     }
                     .padding(.bottom, 500)
                 }
