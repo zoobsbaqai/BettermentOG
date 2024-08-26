@@ -231,9 +231,11 @@ Betterment30 is a rugged 30 day challenge in which you put yourself through a se
 }
 
 struct Project50View: View {
-    @State private var selectedOption = "7:00AM" // State to keep track of the selected option
+    @State private var selectedOption = "7:00AM"
     @State private var goal = ""
     @State private var selectedTime: Double = 45
+    @State private var book = ""
+    @State private var skill = ""
     
     @Environment(\.presentationMode) var presentationMode // Make sure this is inside the struct
     let times = ["6:00AM", "6:30AM", "7:00AM", "7:30AM", "8:00AM"]
@@ -291,20 +293,72 @@ struct Project50View: View {
                         Text(option)
                     }
                 }
+                .padding(.horizontal, 20)
                 .pickerStyle(WheelPickerStyle()) // You can change the style here
-                .frame(height: 75)
+                .frame(height: 100)
                 
             }
             .padding(.bottom, 100)
+            
             VStack{
                 Text("Select how long you can excercise daily")
                     .font(.custom("Fredoka-SemiBold", size: 20))
                 Text("Minutes: \(selectedTime, specifier: "%.0f")")
-                Slider(value: $selectedTime, in: 45...90, step: 1)
-                    .padding()
+                Slider(value: $selectedTime, in: 45...90, step: 5)
+                    .padding(.bottom, 1)
+                    .padding(.horizontal, 20)
                     .accentColor(.yellow)
             }
-            .padding(.top, 120)
+            .padding(.top, 150)
+            VStack{
+                Text("What is a book you'd like to read?")
+                    .font(.custom("Fredoka-SemiBold", size: 20))
+                TextField("Your Book", text: $book)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(1)
+                    .padding(.horizontal, 5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 2.5)
+                            .stroke(Color.gray, lineWidth: 1.0)
+                    )
+                    .padding(.horizontal, 15)
+            }
+            .padding(.top, 315)
+            VStack{
+                Text("What is a skill you'd like to learn?")
+                    .font(.custom("Fredoka-SemiBold", size: 20))
+                TextField("Your Book", text: $skill)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(1)
+                    .padding(.horizontal, 5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 2.5)
+                            .stroke(Color.gray, lineWidth: 1.0)
+                    )
+                    .padding(.horizontal, 15)
+            }
+            .padding(.top, 475)
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        
+                    }) {
+                        HStack {
+                            Text("Confirm")
+                                .foregroundColor(.black)
+                                .font(.headline)
+                        }
+                        .padding()
+                        .background(Color.yellow)
+                        .cornerRadius(20)
+                        .shadow(radius: 2)
+                        Spacer()
+                    }
+                    .padding(.horizontal, 140.4625) // Padding from the right edge
+                }
+                .padding(.top, 700)
+            }
         }
     }
 }
@@ -312,6 +366,13 @@ struct Project50View: View {
 
 struct Hard75View: View {
     @Environment(\.presentationMode) var presentationMode // Make sure this is inside the struct
+    @State private var selectedOption = "7:00AM"
+    @State private var goal = ""
+    @State private var selectedTime: Double = 45
+    @State private var book = ""
+    @State private var skill = ""
+    let times = ["6:00AM", "6:30AM", "7:00AM", "7:30AM", "8:00AM"]
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack{
@@ -354,13 +415,110 @@ struct Hard75View: View {
                     }
                     .padding(.bottom, 500)
                 }
+                VStack {
+                    Text("What is your main goal for this regiment?")
+                        .font(.custom("Fredoka-SemiBold", size: 20))
+                    TextField("Your Goal", text: $goal)
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(1)
+                        .padding(.horizontal, 5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 2.5)
+                                .stroke(Color.gray, lineWidth: 1.0)
+                        )
+                        .padding(.horizontal, 15)
+                        .padding(.bottom, 200)
+                }
+                .padding(.bottom, 110)
+                VStack{
+                    Text("Select a time for an alarm")
+                        .font(.custom("Fredoka-SemiBold", size: 20))
+                    
+                    Picker("Select an option", selection: $selectedOption) {
+                        ForEach(times, id: \.self) { option in
+                            Text(option)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .pickerStyle(WheelPickerStyle()) // You can change the style here
+                    .frame(height: 100)
+                    
+                }
+                .padding(.bottom, 100)
+                
+                VStack{
+                    Text("Select how long you can excercise daily")
+                        .font(.custom("Fredoka-SemiBold", size: 20))
+                    Text("Minutes: \(selectedTime, specifier: "%.0f")")
+                    Slider(value: $selectedTime, in: 45...90, step: 5)
+                        .padding(.bottom, 1)
+                        .padding(.horizontal, 20)
+                        .accentColor(.yellow)
+                }
+                .padding(.top, 150)
+                VStack{
+                    Text("What is a book you'd like to read?")
+                        .font(.custom("Fredoka-SemiBold", size: 20))
+                    TextField("Your Book", text: $book)
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(1)
+                        .padding(.horizontal, 5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 2.5)
+                                .stroke(Color.gray, lineWidth: 1.0)
+                        )
+                        .padding(.horizontal, 15)
+                }
+                .padding(.top, 315)
+                VStack{
+                    Text("What is a skill you'd like to learn?")
+                        .font(.custom("Fredoka-SemiBold", size: 20))
+                    TextField("Your Book", text: $skill)
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(1)
+                        .padding(.horizontal, 5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 2.5)
+                                .stroke(Color.gray, lineWidth: 1.0)
+                        )
+                        .padding(.horizontal, 15)
+                }
+                .padding(.top, 475)
+                VStack {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            
+                        }) {
+                            HStack {
+                                Text("Confirm")
+                                    .foregroundColor(.black)
+                                    .font(.headline)
+                            }
+                            .padding()
+                            .background(Color.yellow)
+                            .cornerRadius(20)
+                            .shadow(radius: 2)
+                            Spacer()
+                        }
+                        .padding(.horizontal, 140.4625) // Padding from the right edge
+                    }
+                    .padding(.top, 700)
+                }
             }
         }
     }
 }
 
 struct Betterment30View: View {
-    @Environment(\.presentationMode) var presentationMode // Make sure this is inside the struct
+    @Environment(\.presentationMode) var presentationMode
+    @State private var selectedOption = "7:00AM"
+    @State private var goal = ""
+    @State private var selectedTime: Double = 45
+    @State private var book = ""
+    @State private var skill = ""
+    let times = ["6:00AM", "6:30AM", "7:00AM", "7:30AM", "8:00AM"]
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack{
@@ -400,6 +558,96 @@ struct Betterment30View: View {
                         .padding(.trailing) // Padding from the right edge
                     }
                     .padding(.bottom, 500)
+                }
+                VStack {
+                    Text("What is your main goal for this regiment?")
+                        .font(.custom("Fredoka-SemiBold", size: 20))
+                    TextField("Your Goal", text: $goal)
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(1)
+                        .padding(.horizontal, 5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 2.5)
+                                .stroke(Color.gray, lineWidth: 1.0)
+                        )
+                        .padding(.horizontal, 15)
+                        .padding(.bottom, 200)
+                }
+                .padding(.bottom, 110)
+                VStack{
+                    Text("Select a time for an alarm")
+                        .font(.custom("Fredoka-SemiBold", size: 20))
+                    
+                    Picker("Select an option", selection: $selectedOption) {
+                        ForEach(times, id: \.self) { option in
+                            Text(option)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .pickerStyle(WheelPickerStyle()) // You can change the style here
+                    .frame(height: 100)
+                    
+                }
+                .padding(.bottom, 100)
+                
+                VStack{
+                    Text("Select how long you can excercise daily")
+                        .font(.custom("Fredoka-SemiBold", size: 20))
+                    Text("Minutes: \(selectedTime, specifier: "%.0f")")
+                    Slider(value: $selectedTime, in: 45...90, step: 5)
+                        .padding(.bottom, 1)
+                        .padding(.horizontal, 20)
+                        .accentColor(.yellow)
+                }
+                .padding(.top, 150)
+                VStack{
+                    Text("What is a book you'd like to read?")
+                        .font(.custom("Fredoka-SemiBold", size: 20))
+                    TextField("Your Book", text: $book)
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(1)
+                        .padding(.horizontal, 5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 2.5)
+                                .stroke(Color.gray, lineWidth: 1.0)
+                        )
+                        .padding(.horizontal, 15)
+                }
+                .padding(.top, 315)
+                VStack{
+                    Text("What is a skill you'd like to learn?")
+                        .font(.custom("Fredoka-SemiBold", size: 20))
+                    TextField("Your Book", text: $skill)
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(1)
+                        .padding(.horizontal, 5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 2.5)
+                                .stroke(Color.gray, lineWidth: 1.0)
+                        )
+                        .padding(.horizontal, 15)
+                }
+                .padding(.top, 475)
+                VStack {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            
+                        }) {
+                            HStack {
+                                Text("Confirm")
+                                    .foregroundColor(.black)
+                                    .font(.headline)
+                            }
+                            .padding()
+                            .background(Color.yellow)
+                            .cornerRadius(20)
+                            .shadow(radius: 2)
+                            Spacer()
+                        }
+                        .padding(.horizontal, 140.4625) // Padding from the right edge
+                    }
+                    .padding(.top, 700)
                 }
             }
         }
