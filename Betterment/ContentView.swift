@@ -632,7 +632,6 @@ struct Betterment30View: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            
                         }) {
                             HStack {
                                 Text("Confirm")
@@ -690,6 +689,12 @@ struct CustomPopup: View {
             RoundedRectangle(cornerRadius: 20)
                 .stroke(Color.gray, lineWidth: 1)
         )
+    }
+}
+
+struct PlanView: View {
+    var body: some View{
+        Text("Diddy Party")
     }
 }
 
