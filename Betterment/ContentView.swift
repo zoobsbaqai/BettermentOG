@@ -18,15 +18,15 @@ struct ContentView: View {
                     Rectangle()
                         .fill(Color.black)
                         .cornerRadius(25)
-                        .frame(height: geometry.size.height / 3.5)
-                        .position(x: geometry.size.width / 2, y: geometry.size.height / 7)
+                        .frame(width: geometry.size.width * 1, height: geometry.size.height / 2.5)
+                        .position(x: geometry.size.width / 2, y: geometry.size.height * 0.075)
                         .edgesIgnoringSafeArea(.all)
                     
                     NavigationLink(destination: SettingsView()) {
                         Image(systemName: "gearshape")
                             .font(.title)
                             .foregroundColor(.yellow)
-                            .position(CGPoint(x: 350.0, y: 30.0))
+                            .position(x: geometry.size.width / 1.1, y: geometry.size.height * 0.05)
                     }
                     
                     RoutPlanScroll()
@@ -34,25 +34,24 @@ struct ContentView: View {
                     
                     Text("Routine Plans")
                         .font(.custom("Fredoka-SemiBold", size: 36))
-                        .position(CGPoint(x: 130.0, y: 195.0))
+                        .position(x: geometry.size.width / 3.15, y: geometry.size.height * 0.27)
                     
-                    HStack {
+                    HStack(spacing: 0) {
                         Text("Better")
                             .foregroundStyle(.yellow)
                             .font(.custom("Fredoka-SemiBold", size: 56))
-                            .position(CGPoint(x: 95.0, y: 45.0))
                         
                         Text("ment")
                             .foregroundStyle(.white)
                             .font(.custom("Fredoka-SemiBold", size: 56))
-                            .position(CGPoint(x: 38, y: 45))
                     }
+                    .position(x: geometry.size.width / 2.3, y: geometry.size.height * 0.075)
                     
                     VStack {
                         Text("\"one day or day one?\"")
                             .foregroundStyle(.white)
                             .font(.custom("Fredoka-SemiBold", size: 35))
-                            .position(CGPoint(x: 195, y: 100.0))
+                            .position(x: geometry.size.width / 2, y: geometry.size.height * 0.14)
                     }
                 }
             }
@@ -701,6 +700,7 @@ struct PlanView: View {
 extension View {
     func fadeOutTop(fadeLength: CGFloat = 25) -> some View {
         return mask(
+            
             VStack(spacing: 0) {
                 
                 LinearGradient(gradient:
@@ -709,7 +709,6 @@ extension View {
                                startPoint: .top, endPoint: .bottom
                 )
                 .frame(height: fadeLength)
-                
                 Rectangle().fill(Color.black)
             }
         )
