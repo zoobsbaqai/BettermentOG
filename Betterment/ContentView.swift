@@ -30,7 +30,7 @@ struct ContentView: View {
                     }
                     
                     RoutPlanScroll()
-                        .position(x: 197, y: 600)
+                        .position(x: geometry.size.width / 2.152, y: geometry.size.height * 0.8)
                     
                     Text("Routine Plans")
                         .font(.custom("Fredoka-SemiBold", size: 36))
@@ -70,15 +70,15 @@ struct SettingsView: View {
                 
                 Rectangle()
                     .fill(Color.black)
-                    .cornerRadius(35)
-                    .frame(height: geometry.size.height / 3.45)
-                    .position(x: geometry.size.width / 2, y: geometry.size.height / 7)
+                    .cornerRadius(25)
+                    .frame(width: geometry.size.width * 1, height: geometry.size.height / 2.5)
+                    .position(x: geometry.size.width / 2, y: geometry.size.height * 0.075)
                     .edgesIgnoringSafeArea(.all)
                 
                 Text("Settings")
                     .font(.custom("Fredoka-SemiBold", size: 56))
                     .foregroundStyle(.white)
-                    .position(CGPoint(x: 195.0, y: 40.0))
+                    .position(x: geometry.size.width / 2, y: geometry.size.height * 0.075)
                 
                 VStack(spacing: 1) {
                     Image("notiTab")
@@ -114,6 +114,7 @@ struct RoutPlanScroll: View {
     @State private var popupMessage = ""
     
     var body: some View {
+        GeometryReader { geometry in
         ZStack {
             ScrollView {
                 ZStack {
@@ -129,7 +130,7 @@ struct RoutPlanScroll: View {
                             NavigationLink(destination: getDestinationView(index: index)) {
                                 Image(buttonNames[index])
                             }
-                            .position(CGPoint(x: 70.0, y: 265.0))
+                            .position(x: geometry.size.width / 5.5  , y: geometry.size.height * 0.415)
                             Spacer()
                                 .frame(height: 230)
                         }
@@ -143,7 +144,7 @@ struct RoutPlanScroll: View {
                             }) {
                                 Image(infNames[index])
                             }
-                            .position(CGPoint(x: 337, y: 217))
+                            .position(x: geometry.size.width / 1.15  , y: geometry.size.height * 0.345)
                             Spacer()
                                 .frame(height: 230)
                         }
@@ -153,24 +154,24 @@ struct RoutPlanScroll: View {
                     Text("Project 50")
                         .font(.custom("Fredoka-SemiBold", size: 28))
                         .foregroundStyle(.black)
-                        .position(CGPoint(x: 90.0, y: 216))
+                        .position(x: geometry.size.width / 4.45  , y: geometry.size.height * 0.34)
                     Text("75 Hard")
                         .font(.custom("Fredoka-SemiBold", size: 28))
                         .foregroundStyle(.black)
-                        .position(CGPoint(x: 72.5, y: 545.0))
+                        .position(x: geometry.size.width / 5.25  , y: geometry.size.height * 0.845)
                     Text("Betterment30")
                         .font(.custom("Fredoka-SemiBold", size: 28))
                         .foregroundStyle(.black)
-                        .position(CGPoint(x: 110.0, y: 876))
+                        .position(x: geometry.size.width / 3.55  , y: geometry.size.height * 1.355)
                     Image("p50thumbnail")
-                        .position(CGPoint(x: 185.0, y: 0.0))
+                        .position(x: geometry.size.width / 2, y: geometry.size.height * 0.005)
                         .scaleEffect(0.825)
                     Image("75hardthumb")
-                        .position(CGPoint(x: 65.0, y: 375.0))
+                        .position(x: geometry.size.width / 5, y: geometry.size.height * 0.6)
                         .scaleEffect(0.75)
                     Image("betterwhite")
                         .scaleEffect(0.2)
-                        .position(CGPoint(x: 104.0, y: 765.0))
+                        .position(x: geometry.size.width / 3.65, y: geometry.size.height * 1.175)
                 }
                 .padding()
             }
@@ -185,6 +186,7 @@ struct RoutPlanScroll: View {
                 
                 CustomPopup(title: popupTitle, message: popupMessage) {
                     showPopup = false
+                    }
                 }
             }
         }
@@ -658,36 +660,39 @@ struct CustomPopup: View {
     var onClose: () -> Void
     
     var body: some View {
-        ZStack {
-            Color(.yellow)
-            VStack(spacing: 20) {
-                Text(title)
-                    .font(.custom("Fredoka-SemiBold", size: 30))
-                Text(message)
-                    .font(.custom("Fredoka-Regular", size: 20))
-                    .multilineTextAlignment(.center)
-                    .padding()
-                Button(action: {
-                    onClose()
-                }) {
-                    Text("Close")
-                        .font(.headline)
+        GeometryReader { geometry in
+            
+            ZStack {
+                Color(.yellow)
+                VStack(spacing: 20) {
+                    Text(title)
+                        .font(.custom("Fredoka-SemiBold", size: 30))
+                    Text(message)
+                        .font(.custom("Fredoka-Regular", size: 20))
+                        .multilineTextAlignment(.center)
                         .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                    Button(action: {
+                        onClose()
+                    }) {
+                        Text("Close")
+                            .font(.headline)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
                 }
             }
+            .frame(width: 350, height: 375)
+            .background(Color.white)
+            .cornerRadius(20)
+            .shadow(radius: 10)
+            .position(x: geometry.size.width / 2, y: geometry.size.height * 0.3)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.gray, lineWidth: 1)
+            )
         }
-        .frame(width: 350, height: 375)
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(radius: 10)
-        .position(CGPoint(x: 201, y: 200))
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.gray, lineWidth: 1)
-        )
     }
 }
 
