@@ -26,15 +26,15 @@ struct ContentView: View {
                         Image(systemName: "gearshape")
                             .font(.title)
                             .foregroundColor(.yellow)
-                            .position(x: geometry.size.width / 1.1, y: geometry.size.height * 0.05)
+                            .position(x: geometry.size.width / 1.125, y: geometry.size.height * 0.05)
                     }
                     
                     RoutPlanScroll()
-                        .position(x: geometry.size.width / 2.152, y: geometry.size.height * 0.8)
+                        .position(x: geometry.size.width / 2.06, y: geometry.size.height * 0.8)
                     
                     Text("Routine Plans")
                         .font(.custom("Fredoka-SemiBold", size: 36))
-                        .position(x: geometry.size.width / 3.15, y: geometry.size.height * 0.27)
+                        .position(x: geometry.size.width / 3.15, y: geometry.size.height * 0.26)
                     
                     HStack(spacing: 0) {
                         Text("Better")
@@ -130,7 +130,7 @@ struct RoutPlanScroll: View {
                             NavigationLink(destination: getDestinationView(index: index)) {
                                 Image(buttonNames[index])
                             }
-                            .position(x: geometry.size.width / 5.5  , y: geometry.size.height * 0.415)
+                            .position(x: geometry.size.width / 5.5  , y: geometry.size.height * 0.345)
                             Spacer()
                                 .frame(height: 230)
                         }
@@ -144,7 +144,7 @@ struct RoutPlanScroll: View {
                             }) {
                                 Image(infNames[index])
                             }
-                            .position(x: geometry.size.width / 1.15  , y: geometry.size.height * 0.345)
+                            .position(x: geometry.size.width / 1.2  , y: geometry.size.height * 0.29)
                             Spacer()
                                 .frame(height: 230)
                         }
@@ -154,24 +154,25 @@ struct RoutPlanScroll: View {
                     Text("Project 50")
                         .font(.custom("Fredoka-SemiBold", size: 28))
                         .foregroundStyle(.black)
-                        .position(x: geometry.size.width / 4.45  , y: geometry.size.height * 0.34)
+                        .position(x: geometry.size.width / 4.45  , y: geometry.size.height * 0.285)
                     Text("75 Hard")
                         .font(.custom("Fredoka-SemiBold", size: 28))
                         .foregroundStyle(.black)
-                        .position(x: geometry.size.width / 5.25  , y: geometry.size.height * 0.845)
+                        .position(x: geometry.size.width / 5.25  , y: geometry.size.height * 0.702)
                     Text("Betterment30")
                         .font(.custom("Fredoka-SemiBold", size: 28))
                         .foregroundStyle(.black)
-                        .position(x: geometry.size.width / 3.55  , y: geometry.size.height * 1.355)
+                        .position(x: geometry.size.width / 3.5 , y: geometry.size.height * 1.1575)
                     Image("p50thumbnail")
-                        .position(x: geometry.size.width / 2, y: geometry.size.height * 0.005)
+                        .position(x: geometry.size.width / 2.17, y: geometry.size.height * 0.0001)
                         .scaleEffect(0.825)
                     Image("75hardthumb")
-                        .position(x: geometry.size.width / 5, y: geometry.size.height * 0.6)
-                        .scaleEffect(0.75)
+                        .position(x: geometry.size.width / 5, y: geometry.size.height * 0.51)
+                        .scaleEffect(0.8)
                     Image("betterwhite")
                         .scaleEffect(0.2)
-                        .position(x: geometry.size.width / 3.65, y: geometry.size.height * 1.175)
+                        .position(x: geometry.size.width / 3.75, y: geometry.size.height * 1.01)
+
                 }
                 .padding()
             }
