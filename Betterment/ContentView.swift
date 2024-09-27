@@ -249,7 +249,7 @@ struct Project50View: View {
         NavigationView {
             if isDataSaved {
                 // Navigate to p50Regiment directly if data exists
-                p50Regiment()
+                p50Regiment(goal: goal, selectedOption: selectedOption, selectedTime: selectedTime, book: book, skill: skill)
             } else {
                 ZStack {
                     VStack {
@@ -670,11 +670,46 @@ struct Betterment30View: View {
     }
 }
 
-struct p50Regiment: View { // Your new page view
+struct p50Regiment: View {
+    var goal: String
+    var selectedOption: String
+    var selectedTime: Double
+    var book: String
+    var skill: String
     var body: some View {
-        Text("This is the new page!")
-            .font(.largeTitle)
-            .navigationBarBackButtonHidden()
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemGray2), Color(UIColor.darkGray)]), startPoint: .bottomLeading, endPoint: .topTrailing)
+                .edgesIgnoringSafeArea(.all)
+            Text("Project50")
+                .font(.custom("Fredoka-SemiBold", size: 40))
+                .navigationBarBackButtonHidden()
+                .padding(.bottom, 700)
+            VStack{
+                Text("Regiment Details")
+                    .font(.largeTitle)
+                    .padding()
+                
+                Text("Goal: \(goal)")
+                    .font(.headline)
+                    .padding()
+                
+                Text("Alarm Time: \(selectedOption)")
+                    .font(.headline)
+                    .padding()
+                
+                Text("Exercise Duration: \(Int(selectedTime)) minutes")
+                    .font(.headline)
+                    .padding()
+                
+                Text("Book: \(book)")
+                    .font(.headline)
+                    .padding()
+                
+                Text("Skill: \(skill)")
+                    .font(.headline)
+                    .padding()
+            }
+        }
     }
 }
 
