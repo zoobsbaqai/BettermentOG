@@ -239,128 +239,143 @@ struct Project50View: View {
     @State private var book = ""
     @State private var skill = ""
     
-    @Environment(\.presentationMode) var presentationMode // Make sure this is inside the struct
+    @Environment(\.presentationMode) var presentationMode
     let times = ["6:00AM", "6:30AM", "7:00AM", "7:30AM", "8:00AM"]
+    
+    // Check if data exists and navigate accordingly
+    @State private var isDataSaved = false
+    
     var body: some View {
-        
-        ZStack{
-            Image("p50thumbnail")
-                .position(CGPoint(x: 198.0, y: 56.166))
-                .navigationBarBackButtonHidden(true)
-            VStack {
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss() // Dismiss the view
-                    }) {
-                        HStack {
-                            
-                            Image(systemName: "chevron.backward")
-                                .foregroundColor(.yellow)
-                            Text("Back")
-                                .foregroundColor(.yellow)
-                                .font(.headline)
-                        }
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(20)
-                        .shadow(radius: 2)
-                        Spacer()
+        NavigationView {
+            if isDataSaved {
+                // Navigate to p50Regiment directly if data exists
+                p50Regiment()
+            } else {
+                ZStack {
+                    VStack {
+                        Image("p50thumbnail")
+                            .position(CGPoint(x: 198.0, y: 56.166))
                     }
-                    .padding(.trailing) // Padding from the right edge
-                }
-                .padding(.bottom, 500)
-            }
-            VStack {
-                Text("What is your main goal for this regiment?")
-                    .font(.custom("Fredoka-SemiBold", size: 20))
-                TextField("Your Goal", text: $goal)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(1)
-                    .padding(.horizontal, 5)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 2.5)
-                            .stroke(Color.gray, lineWidth: 1.0)
-                    )
-                    .padding(.horizontal, 15)
-                    .padding(.bottom, 200)
-            }
-            .padding(.bottom, 110)
-            VStack{
-                Text("Select a time for an alarm")
-                    .font(.custom("Fredoka-SemiBold", size: 20))
-                
-                Picker("Select an option", selection: $selectedOption) {
-                    ForEach(times, id: \.self) { option in
-                        Text(option)
+                    VStack {
+                        Text("What is your main goal for this regiment?")
+                            .font(.custom("Fredoka-SemiBold", size: 20))
+                        TextField("Your Goal", text: $goal)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(1)
+                            .padding(.horizontal, 5)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 2.5)
+                                    .stroke(Color.gray, lineWidth: 1.0)
+                            )
+                            .padding(.horizontal, 15)
+                            .padding(.bottom, 250)
                     }
-                }
-                .padding(.horizontal, 20)
-                .pickerStyle(WheelPickerStyle()) // You can change the style here
-                .frame(height: 100)
-                
-            }
-            .padding(.bottom, 100)
-            
-            VStack{
-                Text("Select how long you can excercise daily")
-                    .font(.custom("Fredoka-SemiBold", size: 20))
-                Text("Minutes: \(selectedTime, specifier: "%.0f")")
-                Slider(value: $selectedTime, in: 45...90, step: 5)
-                    .padding(.bottom, 1)
-                    .padding(.horizontal, 20)
-                    .accentColor(.yellow)
-            }
-            .padding(.top, 150)
-            VStack{
-                Text("What is a book you'd like to read?")
-                    .font(.custom("Fredoka-SemiBold", size: 20))
-                TextField("Your Book", text: $book)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(1)
-                    .padding(.horizontal, 5)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 2.5)
-                            .stroke(Color.gray, lineWidth: 1.0)
-                    )
-                    .padding(.horizontal, 15)
-            }
-            .padding(.top, 315)
-            VStack{
-                Text("What is a skill you'd like to learn?")
-                    .font(.custom("Fredoka-SemiBold", size: 20))
-                TextField("Your Book", text: $skill)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(1)
-                    .padding(.horizontal, 5)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 2.5)
-                            .stroke(Color.gray, lineWidth: 1.0)
-                    )
-                    .padding(.horizontal, 15)
-            }
-            .padding(.top, 475)
-            VStack {
-                HStack {
-                    Spacer()
-                    Button(action: {
+                    .padding(.bottom, 110)
+                    
+                    VStack {
+                        Text("Select a time for an alarm")
+                            .font(.custom("Fredoka-SemiBold", size: 20))
                         
-                    }) {
-                        HStack {
-                            Text("Confirm")
-                                .foregroundColor(.black)
-                                .font(.headline)
+                        Picker("Select an option", selection: $selectedOption) {
+                            ForEach(times, id: \.self) { option in
+                                Text(option)
+                            }
                         }
-                        .padding()
-                        .background(Color.yellow)
-                        .cornerRadius(20)
-                        .shadow(radius: 2)
-                        Spacer()
+                        .padding(.horizontal, 20)
+                        .pickerStyle(WheelPickerStyle())
+                        .frame(height: 100)
                     }
-                    .padding(.horizontal, 140.4625) // Padding from the right edge
+                    .padding(.bottom, 125)
+                    
+                    VStack {
+                        Text("Select how long you can exercise daily")
+                            .font(.custom("Fredoka-SemiBold", size: 20))
+                        Text("Minutes: \(selectedTime, specifier: "%.0f")")
+                        Slider(value: $selectedTime, in: 45...90, step: 5)
+                            .padding(.bottom, 1)
+                            .padding(.horizontal, 20)
+                            .accentColor(.yellow)
+                    }
+                    .padding(.top, 100)
+                    
+                    VStack {
+                        Text("What is a book you'd like to read?")
+                            .font(.custom("Fredoka-SemiBold", size: 20))
+                        TextField("Your Book", text: $book)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(1)
+                            .padding(.horizontal, 5)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 2.5)
+                                    .stroke(Color.gray, lineWidth: 1.0)
+                            )
+                            .padding(.horizontal, 15)
+                    }
+                    .padding(.top, 275)
+                    
+                    VStack {
+                        Text("What is a skill you'd like to learn?")
+                            .font(.custom("Fredoka-SemiBold", size: 20))
+                        TextField("Your Skill", text: $skill)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(1)
+                            .padding(.horizontal, 5)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 2.5)
+                                    .stroke(Color.gray, lineWidth: 1.0)
+                            )
+                            .padding(.horizontal, 15)
+                    }
+                    .padding(.top, 430)
+                    
+                    VStack {
+                        HStack {
+                            Button(action: {
+                                // Save data to UserDefaults
+                                saveData()
+                                isDataSaved = true
+                            }) {
+                                HStack {
+                                    Text("Confirm")
+                                        .foregroundColor(.black)
+                                        .font(.headline)
+                                }
+                                .padding(10)
+                                .background(Color.yellow)
+                                .cornerRadius(20)
+                                .shadow(radius: 2)
+                                Spacer()
+                            }
+                            .padding(.horizontal, 140.4625)
+                        }
+                        .padding(.top, 755)
+                    }
                 }
-                .padding(.top, 700)
+                .onAppear {
+                    loadData() // Load data when the view appears
+                }
             }
+        }
+    }
+    
+    // Save user data to UserDefaults
+    private func saveData() {
+        UserDefaults.standard.set(goal, forKey: "goal")
+        UserDefaults.standard.set(selectedOption, forKey: "selectedOption")
+        UserDefaults.standard.set(selectedTime, forKey: "selectedTime")
+        UserDefaults.standard.set(book, forKey: "book")
+        UserDefaults.standard.set(skill, forKey: "skill")
+    }
+    
+    // Load user data from UserDefaults
+    private func loadData() {
+        if let savedGoal = UserDefaults.standard.string(forKey: "goal") {
+            goal = savedGoal
+            selectedOption = UserDefaults.standard.string(forKey: "selectedOption") ?? "7:00AM"
+            selectedTime = UserDefaults.standard.double(forKey: "selectedTime")
+            book = UserDefaults.standard.string(forKey: "book") ?? ""
+            skill = UserDefaults.standard.string(forKey: "skill") ?? ""
+            isDataSaved = true
         }
     }
 }
@@ -655,6 +670,14 @@ struct Betterment30View: View {
     }
 }
 
+struct p50Regiment: View { // Your new page view
+    var body: some View {
+        Text("This is the new page!")
+            .font(.largeTitle)
+            .navigationBarBackButtonHidden()
+    }
+}
+
 struct CustomPopup: View {
     let title: String
     let message: String
@@ -697,11 +720,6 @@ struct CustomPopup: View {
     }
 }
 
-struct PlanView: View {
-    var body: some View{
-        Text("Diddy Party")
-    }
-}
 
 extension View {
     func fadeOutTop(fadeLength: CGFloat = 25) -> some View {
